@@ -1,6 +1,6 @@
 ﻿;(function () {
     "use strict";
-
+    
     var applicationName = navigator.appName;
     var addScroll = false;
 
@@ -8,69 +8,68 @@
         addScroll = true;
     }
 
-    var pX = 0;
-    var pY = 0;
+    var positionX = 0;
+    var positionY = 0;
     var theLayer;
 
     document.onmousemove = mouseMove;
     if (applicationName === "Netscape") {
-        document.captureEvents(event.MOUSEMOVE);
+        document.captureEvents(Event.MOUSEMOVE);
     }
 
-    function mouseMove(evn) {
+    function mouseMove(netscapeEvent) {
         if (applicationName === "Netscape") {
-            pX = evn.pageX - 5;
-            pY = evn.pageY;
-        }
-        else {
-            pX = event.x - 5;
-            pY = event.y;
-        }
+            positionX = netscapeEvent.pageX - 5;
+            positionY = netscapeEvent.pageY;
 
-        if (applicationName === "Netscape") {
             if (document.layers.ToolTip.visibility === "show") {
                 popTip();
             }
         }
-        else if (document.all.ToolTip.style.visibility === "visible") {
-            popTip();
+        else {
+            positionX = event.x - 5;
+            positionY = event.y;
+
+            if (document.all.ToolTip.style.visibility === "visible") {
+                popTip();
+            }
         }
     }
 
     function popTip() {
         if (applicationName === "Netscape") {
             theLayer = document.layers.ToolTip;
-            if ((pX + 120) > window.innerWidth) {
-                pX = window.innerWidth - 150;
+            if ((positionX + 120) > window.innerWidth) {
+                positionX = window.innerWidth - 150;
             }
 
-            theLayer.left = pX + 10;
-            theLayer.top = pY + 15;
+            theLayer.left = positionX + 10;
+            theLayer.top = positionY + 15;
             theLayer.visibility = "show";
         }
         else {
             theLayer = document.all.ToolTip;
             if (theLayer) {
-                pX = event.x - 5;
-                pY = event.y;
+                positionX = event.x - 5;
+                positionY = event.y;
 
                 if (addScroll) {
-                    pX = pX + document.body.scrollLeft;
-                    pY = pY + document.body.scrollTop;
+                    positionX = positionX + document.body.scrollLeft;
+                    positionY = positionY + document.body.scrollTop;
                 }
 
-                if ((pX + 120) > document.body.clientWidth) {
-                    pX = pX - 150;
+                if ((positionX + 120) > document.body.clientWidth) {
+                    positionX = positionX - 150;
                 }
 
-                theLayer.style.pixelLeft = pX + 10;
-                theLayer.style.pixelTop = pY + 15;
+                theLayer.style.pixelLeft = positionX + 10;
+                theLayer.style.pixelTop = positionY + 15;
                 theLayer.style.visibility = "visible";
             }
         }
     }
 
-    function HideTip() {
+    function hideTip() {
         if (applicationName === "Netscape") {
             document.layers.ToolTip.visibility = "hide";
         }
@@ -79,7 +78,7 @@
         }
     }
 
-    function HideMenu1() {
+    function hideMenu1() {
         if (applicationName === "Netscape") {
             document.layers.menu1.visibility = "hide";
         }
@@ -88,7 +87,7 @@
         }
     }
 
-    function ShowMenu1() {
+    function showMenu1() {
         if (applicationName === "Netscape") {
             theLayer = document.layers.menu1;
             theLayer.visibility = "show";
@@ -99,7 +98,7 @@
         }
     }
 
-    function HideMenu2() {
+    function hideMenu2() {
         if (applicationName === "Netscape") {
             document.layers.menu2.visibility = "hide";
         }
@@ -108,7 +107,7 @@
         }
     }
 
-    function ShowMenu2() {
+    function showMenu2() {
         if (applicationName === "Netscape") {
             theLayer = document.layers.menu2;
             theLayer.visibility = "show";

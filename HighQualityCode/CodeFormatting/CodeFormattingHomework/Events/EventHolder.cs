@@ -16,6 +16,7 @@
             Messages.EventAdded();
         }
 
+        // Deletes all events with a given title, performs a case insensitive search
         public void DeleteEvents(string titleToDelete)
         {
             string title = titleToDelete.ToLower();

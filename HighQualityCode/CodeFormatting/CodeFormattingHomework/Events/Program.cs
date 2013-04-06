@@ -15,6 +15,8 @@
             Console.WriteLine(Messages.OutputString);
         }
 
+        // Possible commands begin with "AddEvent", "DeleteEvents", "ListEvents", "Exit/End"
+        // Format "CommandType Date Time | Title[ | Location]" 
         private static bool ExecuteNextCommand()
         {
             string command = Console.ReadLine();
@@ -76,6 +78,7 @@
             EventHolder.AddEvent(date, title, location);
         }
 
+        // Breaks down (parses) a command in its type, date and time, command title and location (if available)
         private static void GetParameters(string commandForExecution, string commandType, out DateTime dateAndTime, out string eventTitle, out string eventLocation)
         {
             dateAndTime = GetDate(commandForExecution, commandType);

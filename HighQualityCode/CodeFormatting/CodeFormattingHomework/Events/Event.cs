@@ -97,7 +97,8 @@
                 }
             }            
         }
-
+        
+        // Events will appear in the format "DateTTime | Title[ | Location]"
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
