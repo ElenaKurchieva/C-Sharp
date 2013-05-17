@@ -2,7 +2,7 @@
 
 class Carpets
 {
-    static void Main()
+    static void Main() 
     {
         byte n = byte.Parse(Console.ReadLine());
         string dotString = "";
